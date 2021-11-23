@@ -18,9 +18,9 @@ class Pekofy(commands.Cog):
         # Your code will go here
         await ctx.send("I can do stuff!")
 
-    @commands.command(aliases=["owo"])
+    @commands.command(aliases=["pkf"])
     async def pekofy(self, ctx: commands.Context, *, text: str = None):
-        """Uwuize the replied to message, previous message, or your own text."""
+        """Pekofy the replied to message, previous message, or your own text."""
         if not text:
             if hasattr(ctx.message, "reference") and ctx.message.reference:
                 try:
