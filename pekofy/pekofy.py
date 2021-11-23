@@ -31,21 +31,28 @@ class Pekofy(commands.Cog):
     @commands.command()
     async def pekofy(self, ctx: commands.Context, *, text: str = None):
         """This does stuff!"""
-        #text = ""
+        await ctx.send(text)
         if not text:
             if hasattr(ctx.message, "reference") and ctx.message.reference:
                 try:
                     text = (
                         await ctx.fetch_message(ctx.message.reference.message_id)
                     ).content
+                    await ctx.send(text)
                 except (discord.Forbidden, discord.NotFound, discord.HTTPException):
                     pass
             if not text:
                 text = (await ctx.channel.history(limit=2).flatten())[
                     1
                 ].content or "I can't translate that!"
+                await ctx.send(text)
+        await ctx.send(text)
+        sentences = text.split(".")
+        for sentence in sentences:
+            sentence += ", Peko"
+        message = text.join(".")
+
         await ctx.send("message")
-        message = await self.pekofy(text)
         await ctx.send(message)
         
 #    @commands.command()
