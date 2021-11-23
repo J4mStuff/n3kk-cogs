@@ -1,26 +1,61 @@
-from redbot.core import commands
+"""UwU cog for Red-DiscordBot by PhasecoreX."""
+import random
+
 import discord
-from redbot.core.utils import common_filters
-import asyncio
+from redbot.core import commands
 
-class Pekofy(commands.Cog):
-    """Pekofy messages Peko!"""
+from .pcx_lib import type_message
 
-    __author__ = "N3kk"
-    __version__ = "0.1.0"
 
-    def __init__(self, bot):
-        self.bot = bot
+class UwU(commands.Cog):
+    """UwU."""
 
-    @commands.command()
-    async def mycom(self, ctx):
-        """This does stuff!"""
-        # Your code will go here
-        await ctx.send("I can do stuff!")
+    __author__ = "PhasecoreX"
+    __version__ = "2.0.0"
 
-    @commands.command(aliases=["pkf"])
-    async def pekofy(self, ctx: commands.Context, *, text: str = None):
-        """Pekofy the replied to message, previous message, or your own text."""
+    KAOMOJI_JOY = [
+        " (\\* ^ ω ^)",
+        " (o^▽^o)",
+        " (≧◡≦)",
+        ' ☆⌒ヽ(\\*"､^\\*)chu',
+        " ( ˘⌣˘)♡(˘⌣˘ )",
+        " xD",
+    ]
+    KAOMOJI_EMBARRASSED = [
+        " (⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)..",
+        " (\\*^.^\\*)..,",
+        "..,",
+        ",,,",
+        "... ",
+        ".. ",
+        " mmm..",
+        "O.o",
+    ]
+    KAOMOJI_CONFUSE = [" (o_O)?", " (°ロ°) !?", " (ーー;)?", " owo?"]
+    KAOMOJI_SPARKLES = [" \\*:･ﾟ✧\\*:･ﾟ✧ ", " ☆\\*:・ﾟ ", "〜☆ ", " uguu.., ", "-.-"]
+
+    #
+    # Red methods
+    #
+
+    def format_help_for_context(self, ctx: commands.Context) -> str:
+        """Show version in help."""
+        pre_processed = super().format_help_for_context(ctx)
+        return f"{pre_processed}\n\nCog Version: {self.__version__}"
+
+    async def red_delete_data_for_user(
+        self, **kwargs
+    ):  # pylint: disable=unused-argument
+        """Nothing to delete."""
+        return
+
+    #
+    # Command methods
+    #
+
+    @commands.command(aliases=["owo"])
+    async def pkf(self, ctx: commands.Context, *, text: str = None):
+        """Uwuize the replied to message, previous message, or your own text."""
         if not text:
             if hasattr(ctx.message, "reference") and ctx.message.reference:
                 try:
@@ -33,55 +68,119 @@ class Pekofy(commands.Cog):
                 text = (await ctx.channel.history(limit=2).flatten())[
                     1
                 ].content or "I can't translate that!"
-        await self.type_message(
+        await type_message(
             ctx.channel,
-            self.pekofy(text),
+            self.uwuize_string(text),
             allowed_mentions=discord.AllowedMentions(
                 everyone=False, users=False, roles=False
             ),
         )
 
-    @commands.command()
-    async def pekofy2(self, ctx, text: str = None):
-        """Pekofy the replied to message, previous message, or your own text."""
-        if not text:
-            if hasattr(ctx.message, "reference") and ctx.message.reference:
-                try:
-                    text = (
-                        await ctx.fetch_message(ctx.message.reference.message_id)
-                    ).content
-                except (discord.Forbidden, discord.NotFound, discord.HTTPException):
-                    pass
-            if not text:
-                text = (await ctx.channel.history(limit=2).flatten())[
-                    1
-                ].content or "I can't translate that!"
-        await ctx.send(self.pekofy(text))
+    #
+    # Public methods
+    #
 
-    async def type_message(
-        destination: discord.abc.Messageable, content: str, **kwargs
-    ) -> discord.Message:
-        """Simulate typing and sending a message to a destination.
-        Will send a typing indicator, wait a variable amount of time based on the length
-        of the text (to simulate typing speed), then send the message.
+    def uwuize_string(self, string: str):
+        """Uwuize and return a string."""
+        converted = ""
+        current_word = ""
+        for letter in string:
+            if letter.isprintable() and not letter.isspace():
+                current_word += letter
+            elif current_word:
+                converted += self.uwuize_word(current_word) + letter
+                current_word = ""
+            else:
+                converted += letter
+        if current_word:
+            converted += self.uwuize_word(current_word)
+        return converted
+
+    def uwuize_word(self, word: str):
+        """Uwuize and return a word.
+        Thank you to the following for inspiration:
+        https://github.com/senguyen1011/UwUinator
         """
-        content = common_filters.filter_urls(content)
-        try:
-            async with destination.typing():
-                await asyncio.sleep(max(0.25, min(2.5, len(content) * 0.01)))
-            return await destination.send(content=content, **kwargs)
-        except discord.HTTPException:
-            pass  # Not allowed to send messages to this destination (or, sending the message failed)
+        word = word.lower()
+        uwu = word.rstrip(".?!,")
+        punctuations = word[len(uwu) :]
+        final_punctuation = punctuations[-1] if punctuations else ""
+        extra_punctuation = punctuations[:-1] if punctuations else ""
 
-    def pekofy(self, text: str):
-        """Pekofy a text message"""
+        # Process punctuation
+        if final_punctuation == "." and not random.randint(0, 3):
+            final_punctuation = random.choice(self.KAOMOJI_JOY)
+        if final_punctuation == "?" and not random.randint(0, 2):
+            final_punctuation = random.choice(self.KAOMOJI_CONFUSE)
+        if final_punctuation == "!" and not random.randint(0, 2):
+            final_punctuation = random.choice(self.KAOMOJI_JOY)
+        if final_punctuation == "," and not random.randint(0, 3):
+            final_punctuation = random.choice(self.KAOMOJI_EMBARRASSED)
+        if final_punctuation and not random.randint(0, 4):
+            final_punctuation = random.choice(self.KAOMOJI_SPARKLES)
 
-        sentences = text.split(".")
+        # Full word exceptions
+        if uwu in ("you're", "youre"):
+            uwu = "ur"
+        elif uwu == "fuck":
+            uwu = "fwickk"
+        elif uwu == "shit":
+            uwu = "poopoo"
+        elif uwu == "bitch":
+            uwu = "meanie"
+        elif uwu == "asshole":
+            uwu = "b-butthole"
+        elif uwu in ("dick", "penis"):
+            uwu = "peenie"
+        elif uwu in ("cum", "semen"):
+            uwu = "cummies"
+        elif uwu == "ass":
+            uwu = "boi pussy"
+        elif uwu in ("dad", "father"):
+            uwu = "daddy"
+        # Normal word conversion
+        else:
+            # Protect specific word endings from changes
+            protected = ""
+            if (
+                uwu.endswith("le")
+                or uwu.endswith("ll")
+                or uwu.endswith("er")
+                or uwu.endswith("re")
+            ):
+                protected = uwu[-2:]
+                uwu = uwu[:-2]
+            elif (
+                uwu.endswith("les")
+                or uwu.endswith("lls")
+                or uwu.endswith("ers")
+                or uwu.endswith("res")
+            ):
+                protected = uwu[-3:]
+                uwu = uwu[:-3]
+            # l -> w, r -> w, n<vowel> -> ny<vowel>, ove -> uv
+            uwu = (
+                uwu.replace("l", "w")
+                .replace("r", "w")
+                .replace("na", "nya")
+                .replace("ne", "nye")
+                .replace("ni", "nyi")
+                .replace("no", "nyo")
+                .replace("nu", "nyu")
+                .replace("ove", "uv")
+                + protected
+            )
 
-        for sentence in sentences:
-            sentence += ", Peko"
+        # Add back punctuations
+        uwu += extra_punctuation + final_punctuation
 
-        return text.join(".")
+        # Add occasional stutter
+        if (
+            len(uwu) > 2
+            and uwu[0].isalpha()
+            and "-" not in uwu
+            and not random.randint(0, 6)
+        ):
+            uwu = f"{uwu[0]}-{uwu}"
 
-    def unpekofy():
-        return "Not implemented, Peko!"
+        return uwu
