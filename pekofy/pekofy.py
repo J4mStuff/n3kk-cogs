@@ -31,18 +31,7 @@ class Pekofy(commands.Cog):
     @commands.command()
     async def pekofy(self, ctx: commands.Context, *, text: str = None):
         """This does stuff!"""
-        if not text:
-            if hasattr(ctx.message, "reference") and ctx.message.reference:
-                try:
-                    text = (
-                        await ctx.fetch_message(ctx.message.reference.message_id)
-                    ).content
-                except (discord.Forbidden, discord.NotFound, discord.HTTPException):
-                    pass
-            if not text:
-                text = (await ctx.channel.history(limit=2).flatten())[
-                    1
-                ].content or "I can't translate that!"
+        text = await self.get_text(ctx, text)
 
         sentences = text.split(".")
         message = ""
@@ -56,3 +45,18 @@ class Pekofy(commands.Cog):
     @commands.command()
     async def unpekofy(self, ctx: commands.Context, *, text: str = None):
         await ctx.send("Not implemented, Peko!")
+
+    async def get_text(self, ctx: commands.Context, *, text: str = None):
+        if not text:
+            if hasattr(ctx.message, "reference") and ctx.message.reference:
+                try:
+                    text = (
+                        await ctx.fetch_message(ctx.message.reference.message_id)
+                    ).content
+                except (discord.Forbidden, discord.NotFound, discord.HTTPException):
+                    pass
+            if not text:
+                text = (await ctx.channel.history(limit=2).flatten())[
+                    1
+                ].content or "I can't translate that!"
+        return text
