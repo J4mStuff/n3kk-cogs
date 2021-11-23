@@ -16,32 +16,38 @@ class Pekofy(commands.Cog):
         await ctx.send("I can do stuff!") 
 
     @commands.command()
-    async def pekofy(self, ctx):#, text: str = None):
-        #"""Pekofy the replied to message, previous message, or your own text."""
-        #text = ""
-        #if hasattr(ctx.message, "reference") and ctx.message.reference:
-        #    try:
-        #        text = (
-        #            await ctx.fetch_message(ctx.message.reference.message_id)
-        #        ).content
-        #    except (discord.Forbidden, discord.NotFound, discord.HTTPException):
-        #        pass
-        #if not text:
-        #    text = (await ctx.channel.history(limit=2).flatten())[
-        #        1
-        #    ].content or "I can't translate that!"
-        #await ctx.send(self.pekofy(text))
-        await ctx.send("123")
-
-    def pekofy(self, text: str):
-        """Pekofy a text message"""
-
-        sentences = text.split(".")
-
-        for sentence in sentences:
-            sentence += ", Peko"
-
-        return text.join(".")
-
-    def unpekofy():
-        return "Not implemented, Peko!"
+    async def pekofy(self, ctx):
+        """This does stuff!"""
+        # Your code will go here
+        await ctx.send("I can do stuff!") 
+        
+#    @commands.command()
+#    async def pekofy(self, ctx):#, text: str = None):
+#        #"""Pekofy the replied to message, previous message, or your own text."""
+#        #text = ""
+#        #if hasattr(ctx.message, "reference") and ctx.message.reference:
+#        #    try:
+#        #        text = (
+#        #            await ctx.fetch_message(ctx.message.reference.message_id)
+#        #        ).content
+#        #    except (discord.Forbidden, discord.NotFound, discord.HTTPException):
+#        #        pass
+#        #if not text:
+#        #    text = (await ctx.channel.history(limit=2).flatten())[
+#        #        1
+#        #    ].content or "I can't translate that!"
+#        #await ctx.send(self.pekofy(text))
+#        await ctx.send("123")
+#
+#    def pekofy(self, text: str):
+#        """Pekofy a text message"""
+#
+#        sentences = text.split(".")
+#
+#        for sentence in sentences:
+#            sentence += ", Peko"
+#
+#        return text.join(".")
+#
+#    def unpekofy():
+#        return "Not implemented, Peko!"
