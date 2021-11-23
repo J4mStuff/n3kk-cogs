@@ -1,4 +1,6 @@
+from discord import message
 from redbot.core import commands
+import re
 import discord
 
 class Pekofy(commands.Cog):
@@ -10,18 +12,6 @@ class Pekofy(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    async def pekofy(self, text: str):
-        """Pekofy a text message"""
-
-        sentences = text.split(".")
-
-        for sentence in sentences:
-            sentence += ", Peko"
-
-        result = text.join(".")
-
-        return result
-
     @commands.command()
     async def mycom(self, ctx):
         """This does stuff!"""
@@ -31,13 +21,9 @@ class Pekofy(commands.Cog):
     @commands.command()
     async def pekofy(self, ctx: commands.Context, *, text: str = None):
         """This does stuff!"""
-        text_block = await self.get_text(ctx, text)
 
-        sentences = text_block.split(".")
-        message = ""
-        for sentence in sentences:
-        	if(sentence is not ""):
-        		message = message + sentence + ", Peko."
+        text_block = await self.get_text(ctx, text)
+        message = await self.pekofy_text(text_block)
 
         await ctx.send(message)
 
@@ -45,6 +31,12 @@ class Pekofy(commands.Cog):
     @commands.command()
     async def unpekofy(self, ctx: commands.Context, *, text: str = None):
         await ctx.send("Not implemented, Peko!")
+
+    async def pekofy_text(self, text:str = None):
+        signs = ["(?<!peko)(\.)", "(?<!peko)(\!)", "(?<!peko)(\?)"]
+        for sign in signs:
+            text = re.sub(sign, ", peko\\1", text, 0, re.IGNORECASE)
+        return text
 
     async def get_text(self, ctx: commands.Context, text: str = None):
         if not text:
