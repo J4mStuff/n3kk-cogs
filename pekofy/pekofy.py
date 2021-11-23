@@ -51,7 +51,7 @@ class Pekofy(commands.Cog):
         sentences = text.split(".")
         message = ""
         for sentence in sentences:
-            message = sentence+", Peko."
+            message = message + sentence + ", Peko."
 
         await ctx.send("message")
         await ctx.send(message)
