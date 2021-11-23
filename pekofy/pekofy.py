@@ -31,9 +31,9 @@ class Pekofy(commands.Cog):
     @commands.command()
     async def pekofy(self, ctx: commands.Context, *, text: str = None):
         """This does stuff!"""
-        text = await self.get_text(ctx, text)
+        text_block = await self.get_text(ctx, text)
 
-        sentences = text.split(".")
+        sentences = text_block.split(".")
         message = ""
         for sentence in sentences:
         	if(sentence is not ""):
@@ -46,7 +46,7 @@ class Pekofy(commands.Cog):
     async def unpekofy(self, ctx: commands.Context, *, text: str = None):
         await ctx.send("Not implemented, Peko!")
 
-    async def get_text(self, ctx: commands.Context, *, text: str = None):
+    async def get_text(self, ctx: commands.Context, text: str = None):
         if not text:
             if hasattr(ctx.message, "reference") and ctx.message.reference:
                 try:
