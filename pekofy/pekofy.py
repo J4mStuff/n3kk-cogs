@@ -35,7 +35,12 @@ class Pekofy(commands.Cog):
         await ctx.send(message)
 
     async def pekofy_text(self, text:str = None):
-        signs = [r'(?<!peko)(\.)', r'(?<!peko)(\!)', r'(?<!peko)(\?)']
+        signs = {
+            r'(?<!peko)(\.+)': ", peko.",
+            r'(?<!peko)(\!+)': ", PEKO!!!",
+            r'(?<!peko)(\?+)': ", p-peko???",
+            r'(?<!peko)[^\?|\.\!]+$': ", peko"
+        }
         for sign in signs:
             text = re.sub(sign, ", peko\\1", text, 0, re.IGNORECASE)
         return text
