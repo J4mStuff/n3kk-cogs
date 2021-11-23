@@ -4,7 +4,7 @@ import random
 import discord
 from redbot.core import commands
 
-from .pcx_lib import type_message
+from .n3k_lib import type_message
 
 
 class UwU(commands.Cog):
