@@ -41,8 +41,8 @@ class Pekofy(commands.Cog):
             r'(?<!peko)(\?+)': ", p-peko???",
             r'(?<!peko)[^\?|\.\!]+$': ", peko"
         }
-        for sign in signs:
-            text = re.sub(sign, ", peko\\1", text, 0, re.IGNORECASE)
+        for key, value in signs.keys:
+            text = re.sub(key, value, text, 0, re.IGNORECASE)
         return text
 
     async def unpekofy_text(self, text:str = None):
