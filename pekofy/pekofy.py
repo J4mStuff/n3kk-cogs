@@ -12,7 +12,13 @@ class Pekofy(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def pekofy(self, ctx: commands.Context, text: str = None):
+    async def mycom(self, ctx):
+        """This does stuff!"""
+        # Your code will go here
+        await ctx.send("I can do stuff!")
+
+    @commands.command()
+    async def pekofy(self, ctx, text: str = None):
         """Pekofy the replied to message, previous message, or your own text."""
         #if not text:
         #    if hasattr(ctx.message, "reference") and ctx.message.reference:
