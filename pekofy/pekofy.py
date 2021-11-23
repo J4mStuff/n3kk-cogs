@@ -10,7 +10,7 @@ class Pekofy(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    def pekofy(self, text: str):
+    async def pekofy(self, text: str):
         """Pekofy a text message"""
 
         sentences = text.split(".")
@@ -18,7 +18,9 @@ class Pekofy(commands.Cog):
         for sentence in sentences:
             sentence += ", Peko"
 
-        return text.join(".")
+        result = text.join(".")
+
+        return result
 
     @commands.command()
     async def mycom(self, ctx):
@@ -42,7 +44,7 @@ class Pekofy(commands.Cog):
                 1
             ].content or "I can't translate that!"
         await ctx.send("test")
-        message = self.pekofy(text)
+        message = await self.pekofy(text)
         await ctx.send(message)
         
 #    @commands.command()
