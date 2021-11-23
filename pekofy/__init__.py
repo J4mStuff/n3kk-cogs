@@ -4,5 +4,5 @@ from .pekofy import Pekofy
 
 def setup(bot: Red):
     """Bot"""
-    cog = Pekofy()
+    cog = Pekofy(bot)
     bot.add_cog(cog)
