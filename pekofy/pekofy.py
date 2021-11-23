@@ -7,7 +7,7 @@ from redbot.core import commands
 from .n3k_lib import type_message
 
 
-class UwU(commands.Cog):
+class Pekofy(commands.Cog):
     """UwU."""
 
     __author__ = "PhasecoreX"
