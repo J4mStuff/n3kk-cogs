@@ -14,13 +14,13 @@ class Pekofy(commands.Cog):
     @commands.command()
     async def pekofy(self, ctx: commands.Context, text: str = None):
         """Pekofy the replied to message, previous message, or your own text."""
-        text = self.get_text(ctx, text)
+        text = await self.get_text(ctx, text)
         await ctx.send(self.pekofy(text))
 
     @commands.command()
     async def unpekofy(self, ctx: commands.Context, *, text: str = None):
         """Unpekofies the replied to message, previous message, or your own text."""
-        text = self.get_text(ctx, text)
+        text = await self.get_text(ctx, text)
         await ctx.send(self.unpekofy(text))
 
 
