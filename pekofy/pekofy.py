@@ -27,7 +27,7 @@ class Pekofy(commands.Cog):
         #            1
         #        ].content or "I can't translate that!"
         #   text = self.pekofy(text)
-        await ctx.send(text+"123")
+        await ctx.send("I can do stuff!")
 
     #@commands.command()
     #async def unpekofy(self, ctx: commands.Context, *, text: str = None):
