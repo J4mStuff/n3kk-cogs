@@ -1,8 +1,7 @@
 from redbot.core import commands
-import discord
 
 class Pekofy(commands.Cog):
-    """Pekofy messages Peko!"""
+    #"""Pekofy messages Peko!"""
 
     __author__ = "N3kk"
     __version__ = "0.1.0"
@@ -14,7 +13,7 @@ class Pekofy(commands.Cog):
     async def mycom(self, ctx):
         """This does stuff!"""
         # Your code will go here
-        await ctx.send("I can do stuff!")
+        await ctx.send("I can do stuff!") 
 
     @commands.command()
     async def pekofy(self, ctx):#, text: str = None):
