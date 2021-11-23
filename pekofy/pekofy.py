@@ -29,7 +29,7 @@ class Pekofy(commands.Cog):
         await ctx.send("I can do stuff!") 
 
     @commands.command()
-    async def pekofy(self, ctx, text: str = None):
+    async def pekofy(self, ctx: commands.Context, *, text: str = None):
         """This does stuff!"""
         #text = ""
         if not text:
@@ -44,6 +44,7 @@ class Pekofy(commands.Cog):
                 text = (await ctx.channel.history(limit=2).flatten())[
                     1
                 ].content or "I can't translate that!"
+        await ctx.send("message")
         message = await self.pekofy(text)
         await ctx.send(message)
         
