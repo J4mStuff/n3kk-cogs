@@ -7,7 +7,7 @@ class Pekofy(commands.Cog):
     #"""Pekofy messages Peko!"""
 
     __author__ = "N3kk"
-    __version__ = "0.1.0"
+    __version__ = "1.0.0"
 
     def __init__(self, bot):
         self.bot = bot
