@@ -27,15 +27,23 @@ class Pekofy(commands.Cog):
 
         await ctx.send(message)
 
-
     @commands.command()
     async def unpekofy(self, ctx: commands.Context, *, text: str = None):
-        await ctx.send("Not implemented, Peko!")
+        text_block = await self.get_text(ctx, text)
+        message = await self.unpekofy_text(text_block)
+
+        await ctx.send(message)
 
     async def pekofy_text(self, text:str = None):
-        signs = ["(?<!peko)(\.)", "(?<!peko)(\!)", "(?<!peko)(\?)"]
+        signs = [r'(?<!peko)(\.)', r'(?<!peko)(\!)', r'(?<!peko)(\?)']
         for sign in signs:
             text = re.sub(sign, ", peko\\1", text, 0, re.IGNORECASE)
+        return text
+
+    async def unpekofy_text(self, text:str = None):
+        signs = [r',\s*peko(\.)', r',\s*peko(\!)', r',\s*peko(\?)']
+        for sign in signs:
+            text = re.sub(sign, "\\1", text, 0, re.IGNORECASE)
         return text
 
     async def get_text(self, ctx: commands.Context, text: str = None):
