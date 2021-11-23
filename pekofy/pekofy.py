@@ -31,50 +31,28 @@ class Pekofy(commands.Cog):
     @commands.command()
     async def pekofy(self, ctx: commands.Context, *, text: str = None):
         """This does stuff!"""
-        await ctx.send("1 "+text)
         if not text:
             if hasattr(ctx.message, "reference") and ctx.message.reference:
                 try:
                     text = (
                         await ctx.fetch_message(ctx.message.reference.message_id)
                     ).content
-                    await ctx.send("2 "+text)
                 except (discord.Forbidden, discord.NotFound, discord.HTTPException):
                     pass
             if not text:
                 text = (await ctx.channel.history(limit=2).flatten())[
                     1
                 ].content or "I can't translate that!"
-                await ctx.send("3 "+text)
-        await ctx.send("4 "+text)
 
         sentences = text.split(".")
         message = ""
         for sentence in sentences:
-            message = message + sentence + ", Peko."
+        	if(sentence is not ""):
+        		message = message + sentence + ", Peko."
 
-        await ctx.send("message")
         await ctx.send(message)
-        
-#    @commands.command()
-#    async def pekofy(self, ctx):#, text: str = None):
-#        #"""Pekofy the replied to message, previous message, or your own text."""
-#        #text = ""
-#        #if hasattr(ctx.message, "reference") and ctx.message.reference:
-#        #    try:
-#        #        text = (
-#        #            await ctx.fetch_message(ctx.message.reference.message_id)
-#        #        ).content
-#        #    except (discord.Forbidden, discord.NotFound, discord.HTTPException):
-#        #        pass
-#        #if not text:
-#        #    text = (await ctx.channel.history(limit=2).flatten())[
-#        #        1
-#        #    ].content or "I can't translate that!"
-#        #await ctx.send(self.pekofy(text))
-#        await ctx.send("123")
-#
 
-#
-#    def unpekofy():
-#        return "Not implemented, Peko!"
+
+    @commands.command()
+    async def unpekofy(self, ctx: commands.Context, *, text: str = None):
+        await ctx.send("Not implemented, Peko!")
