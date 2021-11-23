@@ -36,9 +36,10 @@ class Pekofy(commands.Cog):
 
     async def pekofy_text(self, text:str = None):
         signs = {
-            r'(?<!peko)(\.+)': ", peko.",
-            r'(?<!peko)(\!+)': ", PEKO!!!",
-            r'(?<!peko)(\?+)': ", p-peko???",
+            r'(?<!peko)(\.+)': ", peko\\1",
+            r'(?<!peko)(\!+)': ", PEKO\\1",
+            r'(?<!peko)(\?+)': ", p-peko\\1",
+            r'(?<!peko)(\~+)': ", peko\\1",
             r'(?<!peko)([^\?|\.\!]+)$': "\\1, peko"
         }
         for key, value in signs.items():
