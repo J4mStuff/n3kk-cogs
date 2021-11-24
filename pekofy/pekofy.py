@@ -3,6 +3,7 @@ from redbot.core import commands
 import re
 import discord
 
+
 class Pekofy(commands.Cog):
     #"""Pekofy messages Peko!"""
 
@@ -28,7 +29,7 @@ class Pekofy(commands.Cog):
 
         await ctx.send(message)
 
-    async def pekofy_text(self, text:str = None):
+    async def pekofy_text(self, text: str = None):
         signs = {
             r'(?<!peko)(\.+)': ", peko\\1",
             r'(?<!peko)([\?|\!]+)': ", PEKO?!?",
@@ -41,7 +42,7 @@ class Pekofy(commands.Cog):
             text = re.sub(key, value, text, 0, re.IGNORECASE)
         return text
 
-    async def unpekofy_text(self, text:str = None):
+    async def unpekofy_text(self, text: str = None):
         signs = [r',\s*peko(\.)', r',\s*peko(\!)', r',\s*peko(\?)']
         for sign in signs:
             text = re.sub(sign, "\\1", text, 0, re.IGNORECASE)

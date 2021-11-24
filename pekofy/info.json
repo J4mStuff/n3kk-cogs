@@ -1,14 +1,10 @@
 {
-    "name": "Pekofy",
-    "author": [
-        "N3kk (Chunchunmaru#0003)"
-    ],
-    "short": "(Un)Pekofies messages.",
-    "description": "Takes the previous message and pekofies it, Peko!",
-    "install_msg": "Peko!",
-    "tags": [
-        "utility"
-    ],
-    "min_bot_version": "3.4.0",
-    "end_user_data_statement": "This cog does not persistently store data or metadata about users."
+  "name": "Pekofy",
+  "author": ["N3kk (Chunchunmaru#0003)"],
+  "short": "(Un)Pekofies messages.",
+  "description": "Takes the previous message and pekofies it, Peko!",
+  "install_msg": "Peko!",
+  "tags": ["utility"],
+  "min_bot_version": "3.4.0",
+  "end_user_data_statement": "This cog does not persistently store data or metadata about users."
 }
