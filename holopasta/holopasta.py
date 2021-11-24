@@ -1,7 +1,9 @@
+"""Holopasta main script"""
 from redbot.core import commands
 
 
 class Holopasta(commands.Cog):
+    """Cursed pastas start here"""
     __author__ = "N3kk"
     __version__ = "1.0.0"
 
@@ -10,10 +12,12 @@ class Holopasta(commands.Cog):
 
     @commands.command()
     async def koronepasta(self, ctx: commands.Context):
+        """Posts Korone pasta"""
         await ctx.send(self.korone_pasta)
 
     @commands.command()
     async def pekopasta(self, ctx: commands.Context):
+        """Posts Pekora pasta"""
         await ctx.send(self.peko_pasta)
 
     korone_pasta = """
