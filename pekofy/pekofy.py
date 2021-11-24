@@ -7,16 +7,10 @@ class Pekofy(commands.Cog):
     #"""Pekofy messages Peko!"""
 
     __author__ = "N3kk"
-    __version__ = "1.0.0"
+    __version__ = "1.1.2"
 
     def __init__(self, bot):
         self.bot = bot
-
-    @commands.command()
-    async def mycom(self, ctx):
-        """This does stuff!"""
-        # Your code will go here
-        await ctx.send("I can do stuff!") 
 
     @commands.command()
     async def pekofy(self, ctx: commands.Context, *, text: str = None):

@@ -1,0 +1,14 @@
+{
+    "name": "Holopasta",
+    "author": [
+        "N3kk (Chunchunmaru#0003)"
+    ],
+    "short": "Pastas.",
+    "description": "Just don't",
+    "install_msg": "Don't use it",
+    "tags": [
+        "cursed"
+    ],
+    "min_bot_version": "3.4.0",
+    "end_user_data_statement": "This cog does not persistently store data or metadata about users."
+}
