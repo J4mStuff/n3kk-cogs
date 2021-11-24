@@ -1,3 +1,3 @@
 How to install on your RedBot instance:
 [p]repo add n3kk-cogs https://github.com/J4mStuff/n3kk-cogs
-[p]cog install n3kk-cogs pekofy
+[p]cog install n3kk-cogs [cogname]
