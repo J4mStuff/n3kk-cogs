@@ -41,7 +41,7 @@ class Pekofy(commands.Cog):
             r'(?<!peko)([^\!]|\s|$)(\?+)([^\!]|\s|$)': "\\1, PEKO\\2\\3",
             r'(?<!peko)(\?+[^\!\?])': ", p-peko\\1",
             r'(?<!peko)(\~+)': ", peko\\1",
-            r'(?<!peko)([^\?|\.\!]+)$': "\\1, peko"
+            r'(?<!peko)([^\?|\.\!]+)$': "\\1, peko."
         }
         for key, value in signs.items():
             text = re.sub(key, value, text, 0, re.IGNORECASE)
